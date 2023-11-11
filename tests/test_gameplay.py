@@ -27,6 +27,27 @@ def pair(lst):
   # if we don't find a pair, we return 0
   return 0
 
+def two_pairs(lst):
+  # we need to keep track of the pairs we find
+  # we can do this by creating a list
+  # we will append the pairs we find to this list
+  pairs = []
+  # the range is 6, 0, -1 because we want to start at 6 and go down to 1
+  # we start at 6 because we want to find the highest pair
+  # ex: start at 6, then 5, then 4, etc. until we reach 1
+  # 0 is excluded, so we stop at 1
+  for i in range(6, 0, -1):
+    # if the count of the number is greater than or equal to 2, then we have a pair
+    # once we find a pair, we append the pair to the pairs list
+    # we start at 6 so we find the highest pair first
+    if lst.count(i) >= 2:
+      pairs.append(i)
+  # if we don't find 2 pairs, we return 0
+  if len(pairs) != 2:
+    return 0
+  # if we find 2 pairs, we return the sum of the pairs * 2
+  return sum(pairs) * 2
+
 class TestChance(unittest.TestCase):
     def test_chance(self):
       # Arrange
@@ -133,6 +154,50 @@ class TestPair3(unittest.TestCase):
 
     # Act
     result = pair(dice)
+
+    # Assert
+    self.assertEqual(result, 0)
+
+class TestTwoPairs(unittest.TestCase):
+  def test_two_pairs(self):
+    # Arrange
+    dice = [1,1,2,3,3]
+
+    # Act
+    result = two_pairs(dice)
+
+    # Assert
+    self.assertEqual(result, (1+1+3+3))
+
+class TestTwoPairs2(unittest.TestCase):
+  def test_two_pairs(self):
+    # Arrange
+    dice = [1,1,2,3,4]
+
+    # Act
+    result = two_pairs(dice)
+
+    # Assert
+    self.assertEqual(result, 0)
+
+class TestTwoPairs3(unittest.TestCase):
+  def test_two_pairs(self):
+    # Arrange
+    dice = [1,1,2,2,2]
+
+    # Act
+    result = two_pairs(dice)
+
+    # Assert
+    self.assertEqual(result, (1+1+2+2))
+
+class TestTwoPairs4(unittest.TestCase):
+  def test_two_pairs(self):
+    # Arrange
+    dice = [3,3,3,3,1]
+
+    # Act
+    result = two_pairs(dice)
 
     # Assert
     self.assertEqual(result, 0)
